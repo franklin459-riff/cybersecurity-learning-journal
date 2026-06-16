@@ -2,7 +2,7 @@
 
 ## Current Position
 
-I currently work as a Security Solutions Architect with experience in endpoint security and enterprise security operations.
+I currently work in Security Solutions Architecture with experience in endpoint security and enterprise security operations.
 
 ## Why Security Architecture
 
