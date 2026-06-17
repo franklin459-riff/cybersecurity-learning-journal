@@ -4,4 +4,4 @@ A collection of my cybersecurity learning notes, architecture studies, and pract
 
 ## Articles
 
-- [From Endpoint Security to Security Architecture](articles/from-endpoint-security-to-security-architecture.md)
+[What is Endpoint Security](articles/what-is-endpoint-security.md)
