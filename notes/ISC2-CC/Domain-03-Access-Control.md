@@ -12,7 +12,7 @@ These concepts describe how users interact with systems securely.
 
 ## Identification
 
-A user claims an identity.
+A user claims an identity
 
 Question Answered:
 
