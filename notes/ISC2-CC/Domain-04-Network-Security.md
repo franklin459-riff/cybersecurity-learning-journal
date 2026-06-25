@@ -1,24 +1,55 @@
 # 🌐 Domain 4 – Network Security
 
-<p align="center">
-  <img src="../../images/domain-04-network-security.png" width="900">
-</p>
-
 > **Objective:** Protect data while it is transmitted across networks and ensure only authorized communication is allowed.
 
 ---
 
-## 📌 Domain Overview
+# 🧠 Domain Mind Map
 
-Network Security focuses on protecting systems, applications, and data from unauthorized access while ensuring secure communication between devices.
+```mermaid
+mindmap
+  root((🌐 Network Security))
+
+    Protection
+      Firewall
+      IDS
+      IPS
+
+    Connectivity
+      VPN
+      VLAN
+
+    Architecture
+      DMZ
+      Router
+      Switch
+
+    Protocols
+      TCP
+      UDP
+      HTTP
+      HTTPS
+
+    Risk
+      Mitigate
+      Accept
+      Transfer
+      Avoid
+```
+
+---
+
+# 📌 Domain Overview
+
+Network Security protects systems, applications, and data while it travels across networks. It focuses on preventing unauthorized access, securing communications, and reducing the impact of attacks.
 
 ---
 
 # 🔥 Firewall
 
-A **Firewall** monitors and filters incoming and outgoing network traffic based on predefined security rules.
+A **Firewall** filters incoming and outgoing network traffic based on predefined security rules.
 
-### Architecture
+### Network Flow
 
 ```text
 Internet
@@ -29,50 +60,49 @@ Internet
 └──────────┘
     │
  ┌──┴─────┐
- │         │
+ │        │
 Allow    Block
- │         │
+ │        │
 443      23
 HTTPS    Telnet
 ```
 
-Think of a firewall as a **security guard** deciding who is allowed to enter a building.
+Think of it as a **security guard** deciding who is allowed into a building.
 
-| Allows      | Blocks               |
-| ----------- | -------------------- |
-| HTTPS (443) | Telnet (23)          |
-| SSH (22)    | Unauthorized Traffic |
+### Key Points
 
-💡 **Exam Tip:** Firewalls **filter traffic**. They do **not** detect malware already inside the network.
+- Filters network traffic
+- Allows legitimate traffic
+- Blocks unauthorized traffic
 
 ---
 
 # 👁 IDS vs 🛡 IPS
 
-Both monitor network traffic, but they respond differently.
+Both monitor network traffic, but respond differently.
 
-```text
-                Network Traffic
-                      │
-         ┌────────────┴────────────┐
-         │                         │
-       IDS                       IPS
-         │                         │
-    Detect & Alert          Detect & Block
+```mermaid
+flowchart LR
+Traffic --> IDS
+IDS --> Alert
+
+Traffic --> IPS
+IPS --> Block
 ```
 
-| IDS                        | IPS                         |
-| -------------------------- | --------------------------- |
-| Intrusion Detection System | Intrusion Prevention System |
-| Detects attacks            | Detects attacks             |
-| Generates Alerts           | Blocks malicious traffic    |
-| Passive                    | Active                      |
+| Feature | IDS | IPS |
+|---------|-----|-----|
+| Full Form | Intrusion Detection System | Intrusion Prevention System |
+| Detect Attack | ✅ | ✅ |
+| Generate Alert | ✅ | ✅ |
+| Block Attack | ❌ | ✅ |
+| Type | Passive | Active |
 
 ### Memory Trick
 
-✅ IDS = **See**
+🧠 IDS = **See**
 
-✅ IPS = **Stop**
+🧠 IPS = **Stop**
 
 ---
 
@@ -80,25 +110,21 @@ Both monitor network traffic, but they respond differently.
 
 A VPN creates an **encrypted tunnel** between a user and a private network over the Internet.
 
-```text
-Laptop
-   │
-═══════════════════════
-  Encrypted Tunnel
-═══════════════════════
-   │
-Company Network
+```mermaid
+flowchart LR
+Laptop -->|"Encrypted Tunnel"| VPN
+VPN --> CompanyNetwork
 ```
 
 ### Purpose
 
-* Secure remote access
-* Protect confidentiality
-* Encrypt Internet traffic
+- Secure remote access
+- Protect confidentiality
+- Encrypt data over the Internet
 
-Real-world example:
+Example:
 
-Employees working from home connect securely to their office network using a VPN.
+An employee working from home securely connects to the corporate network.
 
 ---
 
@@ -106,98 +132,79 @@ Employees working from home connect securely to their office network using a VPN
 
 A VLAN logically separates devices into different networks while using the same physical switch.
 
-```text
-          Switch
-        /    |     \
-      HR   Finance Guest
+```
+              Switch
+          ┌────┼────┐
+          │    │    │
+         HR Finance Guest
+```
+
+### Benefits
+
+- Network Segmentation
+- Improved Security
+- Reduced Broadcast Traffic
+
+---
+
+# 🏰 DMZ (Demilitarized Zone)
+
+A DMZ is an isolated network used to host public-facing services while protecting the internal network.
+
+```mermaid
+flowchart LR
+Internet --> Firewall1
+Firewall1 --> DMZ
+
+DMZ --> WebServer
+DMZ --> MailServer
+DMZ --> PublicDNS
+
+DMZ --> Firewall2
+
+Firewall2 --> InternalNetwork
+
+InternalNetwork --> HR
+InternalNetwork --> Payroll
+InternalNetwork --> ActiveDirectory
 ```
 
 ### Purpose
 
-* Network Segmentation
-* Better Security
-* Reduced Broadcast Traffic
+If a public server is compromised, attackers are **isolated from the internal network**, making lateral movement much harder.
 
-Example:
+### Usually placed in a DMZ
 
-| VLAN    | Department |
-| ------- | ---------- |
-| VLAN 10 | HR         |
-| VLAN 20 | Finance    |
-| VLAN 30 | Guest      |
+- 🌐 Web Server
+- 📧 Mail Server
+- 🌍 Public DNS
+- 🔄 Reverse Proxy
 
----
+### Never placed in a DMZ
 
-# 🛡 DMZ (Demilitarized Zone)
-
-A DMZ is an isolated network that hosts **public-facing servers**, preventing direct access to the internal network.
-
-```text
-                 Internet
-                     │
-             ┌────────────┐
-             │ Firewall 1 │
-             └────────────┘
-                     │
-      ┌────────────────────────────┐
-      │            DMZ             │
-      │                            │
-      │ Web │ Mail │ DNS │ Server  │
-      └────────────────────────────┘
-                     │
-             ┌────────────┐
-             │ Firewall 2 │
-             └────────────┘
-                     │
-      HR │ Payroll │ Domain Controller │ Users
-```
-
-### Why use a DMZ?
-
-Even if the web server is compromised, attackers **cannot directly access** the internal network.
-
-### Usually placed inside a DMZ
-
-✅ Web Server
-
-✅ Mail Server
-
-✅ Public DNS
-
-✅ Reverse Proxy
-
-### Never placed inside a DMZ
-
-❌ HR Database
-
-❌ Payroll
-
-❌ Active Directory
-
-❌ Employee Workstations
-
-💡 **Exam Tip**
-
-The primary purpose of a DMZ is **to isolate public-facing systems from internal systems.**
+- HR Database
+- Payroll System
+- Active Directory
+- Employee Devices
 
 ---
 
 # 🤝 TCP vs 🚀 UDP
 
-| TCP                 | UDP                   |
-| ------------------- | --------------------- |
-| Reliable            | Faster                |
-| Connection-Oriented | Connectionless        |
-| Guarantees Delivery | No Delivery Guarantee |
-| Slower              | Faster                |
+| Feature | TCP | UDP |
+|---------|------|------|
+| Reliable | ✅ | ❌ |
+| Connection-Oriented | ✅ | ❌ |
+| Guarantees Delivery | ✅ | ❌ |
+| Faster | ❌ | ✅ |
 
 ### Examples
 
-| TCP   | UDP             |
-| ----- | --------------- |
-| HTTPS | DNS             |
-| SSH   | VoIP            |
-| FTP   | Video Streaming |
+| TCP | UDP |
+|------|------|
+| HTTPS | DNS |
+| SSH | VoIP |
+| FTP | Video Streaming |
 
 ### Memory Trick
 
@@ -209,27 +216,26 @@ The primary purpose of a DMZ is **to isolate public-facing systems from internal
 
 # 🌐 HTTP vs HTTPS
 
-| HTTP        | HTTPS        |
-| ----------- | ------------ |
-| Port 80     | Port 443     |
-| Unencrypted | Encrypted    |
-| Less Secure | Uses TLS/SSL |
+| Feature | HTTP | HTTPS |
+|---------|-------|---------|
+| Port | 80 | 443 |
+| Encryption | ❌ | ✅ |
+| Uses TLS | ❌ | ✅ |
 
-HTTPS protects both **Confidentiality** and **Integrity** of web communication.
+HTTPS protects **Confidentiality** and **Integrity** of web communication.
 
 ---
 
 # 🌐 Router vs 🖥 Switch
 
-```text
-Internet
-    │
- Router
-  /    \
-LAN A  LAN B
+```mermaid
+flowchart LR
+Internet --> Router
+Router --> NetworkA
+Router --> NetworkB
 ```
 
-A **Router** connects **different networks**.
+A **Router** connects different networks.
 
 ---
 
@@ -239,102 +245,118 @@ PC ─┼── Switch
 PC ─┘
 ```
 
-A **Switch** connects devices **within the same network**.
+A **Switch** connects devices within the same network.
 
-| Router            | Switch           |
-| ----------------- | ---------------- |
-| Layer 3           | Layer 2          |
+| Router | Switch |
+|---------|---------|
+| Layer 3 | Layer 2 |
 | Connects Networks | Connects Devices |
-| Routes Traffic    | Forwards Frames  |
+| Routes Packets | Forwards Frames |
 
 ---
 
 # 🔌 Common Network Ports
 
-| Port  | Protocol | Purpose               |
-| ----- | -------- | --------------------- |
-| 20/21 | FTP      | File Transfer         |
-| 22    | SSH      | Secure Remote Login   |
-| 23    | Telnet   | Insecure Remote Login |
-| 25    | SMTP     | Email                 |
-| 53    | DNS      | Name Resolution       |
-| 80    | HTTP     | Web Traffic           |
-| 110   | POP3     | Email Retrieval       |
-| 143   | IMAP     | Email Retrieval       |
-| 443   | HTTPS    | Secure Web            |
-| 445   | SMB      | Windows File Sharing  |
-| 3389  | RDP      | Remote Desktop        |
-
-💡 **Remember:** SSH (22) is preferred over Telnet (23).
+| Port | Protocol | Purpose |
+|------|----------|----------------------|
+| 20/21 | FTP | File Transfer |
+| 22 | SSH | Secure Remote Login |
+| 23 | Telnet | Insecure Remote Login |
+| 25 | SMTP | Email |
+| 53 | DNS | Name Resolution |
+| 80 | HTTP | Web |
+| 110 | POP3 | Email Retrieval |
+| 143 | IMAP | Email Retrieval |
+| 443 | HTTPS | Secure Web |
+| 445 | SMB | Windows File Sharing |
+| 3389 | RDP | Remote Desktop |
 
 ---
 
 # ⚠ Risk Treatment
 
-```text
-                    Risk
-                      │
- ┌─────────┬──────────┬──────────┬─────────┐
- │         │          │          │
-Mitigate Accept   Transfer   Avoid
- │         │          │          │
-Patch   Live with  Insurance  Stop Activity
+```mermaid
+flowchart TD
+Risk --> Mitigate
+Risk --> Accept
+Risk --> Transfer
+Risk --> Avoid
 ```
 
-| Method   | Meaning                  | Example                      |
-| -------- | ------------------------ | ---------------------------- |
-| Mitigate | Reduce Risk              | Apply Security Patch         |
-| Accept   | Knowingly Live With Risk | Server retiring next week    |
-| Transfer | Shift Financial Risk     | Cyber Insurance              |
-| Avoid    | Eliminate Risk           | Shut down vulnerable service |
+| Treatment | Meaning | Example |
+|-----------|---------|---------|
+| Mitigate | Reduce the risk | Apply patches |
+| Accept | Live with the risk | Server retiring next week |
+| Transfer | Shift financial risk | Cyber Insurance |
+| Avoid | Eliminate the activity | Shut down the vulnerable service |
 
 ---
 
-# 📝 Exam Tips
+# 🌍 Real-World Scenario
 
-> 💡 IDS = Detect
+A company hosts its public website.
 
-> 💡 IPS = Prevent
+```
+Internet
+      │
+Firewall
+      │
+DMZ
+      │
+Web Server
+      │
+Firewall
+      │
+Internal Network
+      │
+HR • Payroll • Active Directory
+```
 
-> 💡 VPN = Secure Encrypted Tunnel
-
-> 💡 VLAN = Network Segmentation
-
-> 💡 DMZ = Public Servers
-
-> 💡 TCP = Reliable
-
-> 💡 UDP = Fast
-
-> 💡 HTTPS = Port 443
-
-> 💡 HTTP = Port 80
-
-> 💡 SSH > Telnet
-
----
-
-# 🌍 Real-World Example
-
-Imagine a company website.
-
-Visitors access the **Web Server** through the Internet.
-
-The Web Server is placed in the **DMZ**, while sensitive systems like **Payroll**, **HR**, and **Active Directory** remain inside the Internal Network behind another firewall.
-
-If the Web Server is compromised, attackers are isolated in the DMZ and must bypass additional security controls before reaching critical business systems.
+If the web server is compromised, the attacker reaches the **DMZ**, not the internal network.
 
 ---
 
-# 🎯 Key Takeaways
+# 💡 Exam Tips
 
-* Firewalls filter network traffic.
-* IDS detects attacks; IPS detects and blocks them.
-* VPNs create encrypted tunnels for remote access.
-* VLANs logically separate networks.
-* DMZs isolate public-facing servers.
-* TCP is reliable; UDP is faster.
-* HTTPS is encrypted; HTTP is not.
-* Routers connect networks; switches connect devices.
-* Understand common ports for the ISC2 CC exam.
-* Know the four Risk Treatment methods: Mitigate, Accept, Transfer, Avoid.
+> ✅ IDS = Detect
+
+> ✅ IPS = Prevent
+
+> ✅ VPN = Encrypted Tunnel
+
+> ✅ VLAN = Segmentation
+
+> ✅ DMZ = Public-Facing Servers
+
+> ✅ TCP = Reliable
+
+> ✅ UDP = Fast
+
+> ✅ HTTP = Port 80
+
+> ✅ HTTPS = Port 443
+
+> ✅ SSH is preferred over Telnet
+
+---
+
+# ⚠ Common Exam Mistakes
+
+- Don't confuse **IDS** with **IPS**.
+- A **DMZ does not prevent attacks**; it **limits the impact**.
+- **VPN provides confidentiality**, not authentication by itself.
+- **TCP is reliable**, **UDP is faster**.
+- **Risk Mitigation ≠ Risk Avoidance**.
+
+---
+
+# 📝 Key Takeaways
+
+- Firewalls filter network traffic.
+- IDS detects attacks; IPS detects and blocks them.
+- VPN creates encrypted tunnels for secure remote access.
+- VLANs logically segment networks.
+- DMZ isolates public-facing services from internal systems.
+- Routers connect networks; switches connect devices.
+- HTTPS encrypts web traffic.
+- Understand common ports and risk treatment methods for the ISC2 CC exam.
