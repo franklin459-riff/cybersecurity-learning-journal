@@ -1,52 +1,92 @@
-# Domain 03 – Access Control Concepts
+# 🔐 Domain 3 – Access Control Concepts
 
-> Certification: ISC2 Certified in Cybersecurity (CC)
-
----
-
-# Identification, Authentication, Authorization and Accountability
-
-These concepts describe how users interact with systems securely.
+> **Objective:** Understand how identities are verified, permissions are assigned, and access to organizational resources is controlled securely.
 
 ---
 
-## Identification
+# 🧠 Domain Mind Map
 
-A user claims an identity
+```mermaid
+mindmap
+  root((🔐 Access Control))
 
-Question Answered:
+    Identity
+      Identification
+      Authentication
+      Authorization
+      Accountability
 
-> Who are you?
+    Authentication
+      Something You Know
+      Something You Have
+      Something You Are
+      Something You Do
+      MFA
+
+    Access Principles
+      Least Privilege
+      Need to Know
+      Separation of Duties
+      Privileged Accounts
+
+    Access Models
+      DAC
+      MAC
+      RBAC
+      ABAC
+```
+
+---
+
+# 📌 Domain Overview
+
+Access Control ensures that only authorized users can access organizational resources. It covers identity verification, authentication methods, authorization, auditing, and access control models used in modern enterprise environments.
+
+---
+
+# 🔑 Identification, Authentication, Authorization & Accountability (IAAA)
+
+```mermaid
+flowchart LR
+Identification --> Authentication
+Authentication --> Authorization
+Authorization --> Accountability
+```
+
+| Concept | Question Answered | Example |
+|----------|-------------------|----------|
+| **Identification** | Who are you? | Username |
+| **Authentication** | Can you prove it? | Password, Fingerprint |
+| **Authorization** | What are you allowed to do? | Folder Permissions |
+| **Accountability** | What did you do? | Audit Logs, SIEM |
+
+---
+
+# 🆔 Identification
+
+A user **claims** an identity.
 
 Examples:
 
-* Username
-* Employee ID
-* Email Address
+- Username
+- Employee ID
+- Email Address
 
-Example:
-
-Username: franky
-
-The user has claimed an identity but has not yet proven it.
+> 💡 Identification does **not** prove identity.
 
 ---
 
-## Authentication
+# 🔐 Authentication
 
-Authentication verifies a claimed identity.
-
-Question Answered:
-
-> Can you prove who you are?
+Authentication **verifies** a claimed identity.
 
 Examples:
 
-* Password
-* PIN
-* Fingerprint
-* Smart Card
-* MFA
+- Password
+- PIN
+- Fingerprint
+- Smart Card
+- MFA
 
 Enterprise Example:
 
@@ -54,41 +94,33 @@ A user signs into Microsoft 365 using a password and Microsoft Authenticator.
 
 ---
 
-## Authorization
+# 🔓 Authorization
 
-Authorization determines what an authenticated user is allowed to do.
-
-Question Answered:
-
-> What are you allowed to access?
+Authorization determines **what an authenticated user can access.**
 
 Examples:
 
-* Read-only access
-* Administrator access
-* Application permissions
-* Folder permissions
+- Read-only permissions
+- Administrator access
+- Folder permissions
+- Application roles
 
 Enterprise Example:
 
-An Endpoint Engineer can view CrowdStrike dashboards but may not have permission to modify policies.
+A Security Analyst can view SIEM dashboards but cannot modify detection rules.
 
 ---
 
-## Accountability
+# 📜 Accountability
 
-Accountability records and tracks user actions.
-
-Question Answered:
-
-> What did you do?
+Accountability records user activity.
 
 Examples:
 
-* Audit Logs
-* SIEM Events
-* Sign-in Logs
-* Security Logs
+- Audit Logs
+- SIEM Events
+- Windows Event Logs
+- Azure Sign-in Logs
 
 Purpose:
 
@@ -96,87 +128,50 @@ Provide traceability and support investigations.
 
 ---
 
-# Authentication Factors
+# 🔑 Authentication Factors
 
-Authentication factors are grouped into categories.
-
----
-
-## Something You Know
-
-Examples:
-
-* Password
-* PIN
-* Passphrase
-* Security Question
+| Factor | Examples |
+|----------|----------|
+| Something You Know | Password, PIN, Passphrase |
+| Something You Have | Smart Card, Phone, Hardware Token |
+| Something You Are | Fingerprint, Face ID, Iris Scan |
+| Something You Do | Typing Pattern, Signature Dynamics |
 
 ---
 
-## Something You Have
+# 🔐 Multi-Factor Authentication (MFA)
 
-Examples:
+MFA requires **two or more different authentication factors.**
 
-* Mobile Authenticator
-* Smart Card
-* Hardware Token
-* Security Key
+✅ Valid
 
----
+| Factor 1 | Factor 2 |
+|-----------|-----------|
+| Password | Authenticator App |
 
-## Something You Are
+❌ Not MFA
 
-Examples:
+| Factor 1 | Factor 2 |
+|-----------|-----------|
+| Password | Security Question |
 
-* Fingerprint
-* Face Recognition
-* Iris Scan
-* Retina Scan
+Both belong to **Something You Know.**
 
 ---
 
-## Something You Do
+# 👥 Access Control Principles
 
-Examples:
-
-* Typing Pattern
-* Signature Dynamics
-
-Less common but still valid authentication factors.
-
----
-
-# Multi-Factor Authentication (MFA)
-
-MFA requires two or more different authentication factors.
-
-Valid Example:
-
-* Password
-* Authenticator App
-
-Something You Know + Something You Have
+| Principle | Purpose |
+|------------|----------|
+| Least Privilege | Minimum permissions required |
+| Need to Know | Access only required information |
+| Separation of Duties | Divide critical tasks among multiple people |
 
 ---
 
-Invalid Example:
+# 🔑 Least Privilege
 
-* Password
-* Security Question
-
-Both belong to the same factor category.
-
-This is not MFA.
-
----
-
-# Least Privilege
-
-Users should receive only the permissions required to perform their jobs.
-
-Purpose:
-
-Reduce risk if an account becomes compromised.
+Users receive only the permissions required to perform their job.
 
 Example:
 
@@ -184,208 +179,166 @@ A Helpdesk Engineer can reset passwords but cannot modify firewall rules.
 
 ---
 
-# Need-to-Know
+# 📂 Need to Know
 
 Users should access only the information necessary for their responsibilities.
 
-Purpose:
-
-Protect sensitive information.
-
 Example:
 
-HR staff can access employee records but should not automatically access merger documentation.
+HR can access employee records but not merger documentation.
 
 ---
 
-# Difference Between Least Privilege and Need-to-Know
+# ⚖ Separation of Duties
 
-Least Privilege:
+```text
+Employee A
+Creates Request
 
-* Focuses on permissions
-* What actions can a user perform?
+↓
 
-Need-to-Know:
+Employee B
+Approves
 
-* Focuses on information
-* What information should a user access?
+↓
 
----
-
-# Separation of Duties
-
-Critical tasks should be divided among multiple individuals.
+Employee C
+Executes
+```
 
 Purpose:
 
-Prevent fraud, abuse and human error.
-
-Example:
-
-* Employee A creates a payment request
-* Employee B approves it
-* Employee C releases payment
+- Prevent fraud
+- Reduce human error
 
 ---
 
-# Privileged Accounts
+# 👑 Privileged Accounts
 
 Privileged accounts have elevated permissions.
 
 Examples:
 
-* Domain Administrator
-* Root Account
-* Local Administrator
-* Global Administrator
+- Domain Administrator
+- Root
+- Local Administrator
+- Global Administrator
 
-These accounts require stronger security controls and monitoring.
+These accounts require:
 
----
-
-# Access Control Models
-
-Access Control Models define how permissions are assigned and enforced.
-
----
-
-## DAC (Discretionary Access Control)
-
-The owner of the resource decides who receives access.
-
-Examples:
-
-* Google Drive Sharing
-* Personal File Sharing
-
-Characteristics:
-
-* Flexible
-* User-controlled
+- MFA
+- Strong passwords
+- Continuous monitoring
+- Audit logging
 
 ---
 
-## MAC (Mandatory Access Control)
+# 🛡 Access Control Models
 
-Access is enforced by system-defined classifications.
-
-Examples:
-
-* Government Systems
-* Military Environments
-
-Common Classifications:
-
-* Confidential
-* Secret
-* Top Secret
-
-Characteristics:
-
-* Highly restrictive
-* Users cannot override permissions
+| Model | Controlled By | Common Example |
+|--------|---------------|----------------|
+| DAC | Owner | Google Drive Sharing |
+| MAC | System Labels | Military Systems |
+| RBAC | Job Role | Finance, HR, Security |
+| ABAC | Multiple Attributes | Microsoft Entra Conditional Access |
 
 ---
 
-## RBAC (Role-Based Access Control)
+# 📊 RBAC vs ABAC
 
-Permissions are assigned based on job roles.
+| RBAC | ABAC |
+|------|------|
+| Based on Job Role | Based on Attributes |
+| Easier to Manage | More Flexible |
+| Static | Dynamic |
 
-Examples:
+Examples of ABAC attributes:
 
-* HR Role
-* Finance Role
-* Security Architect Role
-
-Characteristics:
-
-* Simple administration
-* Common in enterprise environments
-
----
-
-## ABAC (Attribute-Based Access Control)
-
-Access decisions are based on multiple attributes.
-
-Examples:
-
-* User Role
-* Device Compliance
-* Location
-* Time of Day
-* Sign-in Risk
-
-Enterprise Example:
-
-Allow access only if:
-
-* User belongs to Finance
-* Device is compliant
-* Sign-in Risk is low
-* User is connecting from an approved country
-
-Characteristics:
-
-* Dynamic
-* Highly flexible
+- User Role
+- Device Compliance
+- Location
+- Time
+- Sign-in Risk
+- MFA Status
 
 ---
 
-# Real-World Observation
+# 🌍 Real-World Scenario
 
-Modern organizations often combine RBAC and ABAC.
+An employee attempts to access Microsoft Entra.
 
-Example:
+The system evaluates:
 
-RBAC grants Finance users access to an application.
+```text
+Username
+↓
 
-ABAC evaluates additional conditions such as:
+Password
 
-* MFA
-* Device Compliance
-* Location
-* Risk Score
+↓
 
-Access is granted only when both requirements are satisfied.
+MFA
 
----
+↓
 
-# Common Exam Traps
+Device Compliance
 
-Password + Security Question
+↓
 
-* Not MFA
-* Both are Something You Know
+Location
 
----
+↓
 
-Fingerprint
+Risk Score
 
-* Authentication
-* Not Identification
+↓
 
----
+Access Granted
+```
 
-Relying only on country restrictions is weak security.
+RBAC determines **what applications** the employee can access.
 
-Modern Zero Trust solutions evaluate multiple signals.
+ABAC evaluates **whether access should be allowed right now.**
 
 ---
 
-# Revision Checklist
+# ⚠ Common Exam Mistakes
 
-* [x] Identification
-* [x] Authentication
-* [x] Authorization
-* [x] Accountability
-* [x] Authentication Factors
-* [x] MFA
-* [x] Least Privilege
-* [x] Need-to-Know
-* [x] Separation of Duties
-* [x] Privileged Accounts
-* [x] DAC
-* [x] MAC
-* [x] RBAC
-* [x] ABAC
+- Identification ≠ Authentication
+- Authentication ≠ Authorization
+- Password + Security Question is **NOT** MFA
+- Fingerprint is **Authentication**, not Identification
+- Least Privilege controls **permissions**
+- Need to Know controls **information access**
+- RBAC and ABAC often work together
+
+---
+
+# 💡 Exam Tips
+
+> ✅ Username = Identification
+
+> ✅ Password = Authentication
+
+> ✅ Permissions = Authorization
+
+> ✅ Audit Logs = Accountability
+
+> ✅ Password + Fingerprint = MFA
+
+> ✅ Password + Security Question ≠ MFA
+
+> ✅ RBAC = Role
+
+> ✅ ABAC = Attributes
+
+---
+
+# 📝 Key Takeaways
+
+- Identification claims an identity; Authentication proves it.
+- Authorization determines permissions after successful authentication.
+- Accountability records user actions for auditing and investigations.
+- MFA requires different authentication factor categories.
+- Least Privilege and Need to Know reduce unnecessary access.
+- RBAC simplifies permission management, while ABAC provides dynamic, context-aware access decisions.
