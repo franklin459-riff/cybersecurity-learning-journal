@@ -1,324 +1,306 @@
-# Domain 02 – Business Continuity, Disaster Recovery and Incident Response
+# 🔄 Domain 2 – Business Continuity, Disaster Recovery & Incident Response
 
-> Certification: ISC2 Certified in Cybersecurity (CC)
-
----
-
-# Business Continuity (BC)
-
-Business Continuity focuses on maintaining critical business operations during a disruption.
-
-Goal:
-
-> Keep the business running.
-
-Examples:
-
-* Alternate work locations
-* Manual business processes
-* Redundant systems
-* Alternate communication channels
-
-Enterprise Example:
-
-If Microsoft Entra becomes unavailable, critical business operations should continue through predefined contingency processes.
+> **Objective:** Understand how organizations prepare for, respond to, recover from, and continue operations during disruptive events.
 
 ---
 
-# Disaster Recovery (DR)
+# 🧠 Domain Mind Map
 
-Disaster Recovery focuses on restoring IT systems and infrastructure after a disruption.
+```mermaid
+mindmap
+  root((🔄 Business Continuity))
 
-Goal:
+    Business Continuity
+      Critical Operations
+      Alternate Processes
+      Communication
+
+    Disaster Recovery
+      Restore Servers
+      Restore Applications
+      Restore Data
+
+    Recovery Objectives
+      RTO
+      RPO
+
+    Backup Types
+      Full
+      Incremental
+      Differential
+
+    Recovery Sites
+      Cold
+      Warm
+      Hot
+
+    Incident Response
+      Preparation
+      Detection
+      Containment
+      Eradication
+      Recovery
+      Lessons Learned
+```
+
+---
+
+# 📌 Domain Overview
+
+Business Continuity and Disaster Recovery ensure an organization can survive disruptions while minimizing downtime and data loss. Incident Response provides a structured approach to detecting, containing, and recovering from security incidents.
+
+---
+
+# 🏢 Business Continuity (BC)
+
+Business Continuity focuses on **keeping the business running** during a disruption.
+
+### Examples
+
+- Alternate work locations
+- Manual business processes
+- Redundant systems
+- Alternate communication methods
+
+### Goal
+
+> Keep business operations functioning.
+
+---
+
+# 💻 Disaster Recovery (DR)
+
+Disaster Recovery focuses on **restoring IT systems** after an outage.
+
+### Examples
+
+- Restore servers
+- Recover databases
+- Restore applications
+- Rebuild infrastructure
+
+### Goal
 
 > Restore technology services.
 
-Examples:
+---
 
-* Restoring servers
-* Recovering databases
-* Restoring applications from backups
-* Rebuilding infrastructure
+# ⚖️ Business Continuity vs Disaster Recovery
 
-Enterprise Example:
+| Business Continuity | Disaster Recovery |
+|---------------------|-------------------|
+| Focuses on business operations | Focuses on IT systems |
+| Keeps the business running | Restores technology |
+| Business-first | Technology-first |
 
-Recovering a failed Active Directory server from backup.
+> 💡 **Exam Tip:**  
+> BC = Business  
+> DR = Technology
 
 ---
 
-# Business Continuity vs Disaster Recovery
-
-Business Continuity:
-
-* Focuses on business operations
-* Concerned with keeping the organization functioning
-
-Disaster Recovery:
-
-* Focuses on technology recovery
-* Concerned with restoring systems and services
-
----
-
-# Business Impact Analysis (BIA)
+# 📊 Business Impact Analysis (BIA)
 
 A Business Impact Analysis identifies:
 
-* Critical business functions
-* Potential impacts of disruption
-* Recovery priorities
-* Recovery objectives
+- Critical business functions
+- Financial impact
+- Recovery priorities
+- Recovery objectives
+
+### Purpose
+
+Determine **what must be restored first** after a disruption.
+
+---
+
+# ⏱ Recovery Objectives
+
+| Objective | Question Answered |
+|------------|-------------------|
+| **RTO** | How long can the system be unavailable? |
+| **RPO** | How much data can be lost? |
+
+### Memory Trick
+
+```text
+⏱ RTO = Time
+
+💾 RPO = Data
+```
+
+---
+
+# 💾 Backup Types
+
+Backups primarily support **Availability**.
+
+| Backup Type | What Gets Backed Up? | Speed | Storage |
+|-------------|----------------------|--------|---------|
+| Full | Everything | Slowest | Highest |
+| Incremental | Changes since the last backup | Fastest | Lowest |
+| Differential | Changes since the last Full backup | Medium | Medium |
+
+---
+
+## 🧠 Memory Trick
+
+### Incremental
+
+```text
+Monday     Tuesday     Wednesday     Thursday
+
+Full ───► Inc ───► Inc ───► Inc
+```
+
+Each Incremental stores only changes since the previous backup.
+
+---
+
+### Differential
+
+```text
+Monday     Tuesday     Wednesday     Thursday
+
+Full ───► Diff ───► Diff ───► Diff
+           ↑          ↑          ↑
+           └──────────┴──────────┘
+```
+
+Every Differential backup contains everything changed since Monday's Full backup.
+
+---
+
+# 🏢 Recovery Sites
+
+| Site | Cost | Recovery Speed |
+|------|------|----------------|
+| Cold | 💲 | Slowest |
+| Warm | 💲💲 | Moderate |
+| Hot | 💲💲💲 | Fastest |
+
+---
+
+# 🔁 Redundancy
+
+Redundancy removes **Single Points of Failure (SPOF).**
+
+Examples:
+
+- Dual ISPs
+- Multiple Firewalls
+- Multiple Domain Controllers
+- RAID Storage
 
 Purpose:
 
-Determine what must be restored first.
+Improve **Availability**.
 
 ---
 
-# Recovery Time Objective (RTO)
+# 🚨 Incident Response Lifecycle
 
-Defines the maximum acceptable downtime.
-
-Question Answered:
-
-> How long can the service remain unavailable?
-
-Example:
-
-RTO = 2 hours
-
-The service must be restored within 2 hours.
+```mermaid
+flowchart LR
+Preparation --> Detection
+Detection --> Containment
+Containment --> Eradication
+Eradication --> Recovery
+Recovery --> Lessons_Learned
+```
 
 ---
 
-# Recovery Point Objective (RPO)
+# 📖 Incident Response Phases
 
-Defines the maximum acceptable data loss.
-
-Question Answered:
-
-> How much data can be lost?
-
-Example:
-
-Backups occur every 4 hours.
-
-Maximum possible data loss = 4 hours.
-
-RPO = 4 hours.
+| Phase | Primary Goal |
+|--------|--------------|
+| Preparation | Be ready before an incident |
+| Detection & Analysis | Identify suspicious activity |
+| Containment | Stop the spread |
+| Eradication | Remove the root cause |
+| Recovery | Restore normal operations |
+| Lessons Learned | Improve future response |
 
 ---
 
-# Backup Types
+# 🌍 Real-World Scenario
 
-## Full Backup
+An employee opens a phishing email containing ransomware.
 
-Backs up all selected data.
+```text
+Preparation
+↓
+Security awareness training
 
-Advantages:
+↓
 
-* Fast recovery
-* Simple restoration
+Detection
+↓
+EDR detects ransomware
 
-Disadvantages:
+↓
 
-* Requires more storage
-* Longer backup duration
+Containment
+↓
+Isolate the infected laptop
 
----
+↓
 
-## Incremental Backup
+Eradication
+↓
+Remove malware & patch vulnerabilities
 
-Backs up changes since the last backup.
+↓
 
-Advantages:
+Recovery
+↓
+Restore files from backup
 
-* Smallest storage requirement
-* Fast backup process
+↓
 
-Disadvantages:
-
-* More complex restoration
-
----
-
-## Differential Backup
-
-Backs up changes since the last full backup.
-
-Advantages:
-
-* Faster restoration than incremental
-
-Disadvantages:
-
-* Consumes more storage than incremental
+Lessons Learned
+↓
+Update email filtering & train users
+```
 
 ---
 
-# Alternate Recovery Sites
+# ⚠ Common Exam Mistakes
 
-## Cold Site
-
-* Empty facility
-* Minimal equipment
-* Lowest cost
-* Longest recovery time
-
----
-
-## Warm Site
-
-* Partial infrastructure available
-* Some restoration required
-* Moderate cost
+- Business Continuity ≠ Disaster Recovery
+- RTO measures **Time**, not data.
+- RPO measures **Data Loss**, not downtime.
+- Containment stops the spread.
+- Eradication removes the cause.
+- Recovery restores operations.
 
 ---
 
-## Hot Site
+# 💡 Exam Tips
 
-* Fully operational duplicate environment
-* Fastest recovery
-* Highest cost
+> ✅ BC = Keep the business running
 
----
+> ✅ DR = Restore IT systems
 
-# Redundancy
+> ✅ RTO = Time
 
-Redundancy eliminates single points of failure.
+> ✅ RPO = Data Loss
 
-Examples:
+> ✅ Hot Site = Fastest & Most Expensive
 
-* Dual ISPs
-* Multiple Firewalls
-* Multiple Domain Controllers
-* RAID Storage
+> ✅ Cold Site = Cheapest & Slowest
 
-Purpose:
-
-Improve availability and resilience.
+> ✅ Backups support Availability
 
 ---
 
-# Incident Response Lifecycle
+# 📝 Key Takeaways
 
-1. Preparation
-2. Detection and Analysis
-3. Containment
-4. Eradication
-5. Recovery
-6. Lessons Learned
-
----
-
-## Preparation
-
-Activities performed before incidents occur.
-
-Examples:
-
-* Security awareness training
-* Incident response procedures
-* Monitoring tools
-* Playbooks
-
----
-
-## Detection and Analysis
-
-Identify and investigate suspicious activity.
-
-Examples:
-
-* EDR alerts
-* SIEM alerts
-* Log analysis
-
----
-
-## Containment
-
-Limit the spread of the incident.
-
-Examples:
-
-* Isolate compromised endpoint
-* Disable compromised account
-* Block malicious IP address
-
----
-
-## Eradication
-
-Remove the root cause.
-
-Examples:
-
-* Remove malware
-* Patch vulnerabilities
-* Remove malicious accounts
-
----
-
-## Recovery
-
-Restore normal operations.
-
-Examples:
-
-* Reconnect isolated systems
-* Restore services
-* Monitor for recurrence
-
----
-
-## Lessons Learned
-
-Review the incident and improve processes.
-
-Questions:
-
-* What worked well?
-* What failed?
-* What should be improved?
-
----
-
-# Key Exam Distinctions
-
-RTO = Downtime
-
-RPO = Data Loss
-
-Containment = Stop the spread
-
-Eradication = Remove the cause
-
-Recovery = Restore operations
-
-Lessons Learned = Improve for next time
-
----
-
-# Personal Notes
-
-Key lessons from today's session:
-
-* RPO relates to acceptable data loss, not downtime.
-* Incremental backups generally use the least storage.
-* Hot sites provide the fastest recovery but are the most expensive.
-* Most Incident Response questions can be solved by identifying the current phase of the lifecycle.
-
----
-
-# Revision Checklist
-
-* [x] Business Continuity
-* [x] Disaster Recovery
-* [x] Business Impact Analysis
-* [x] RTO
-* [x] RPO
-* [x] Backup Types
-* [x] Hot / Warm / Cold Sites
-* [x] Redundancy
-* [x] Incident Response Lifecycle
+- Business Continuity keeps critical business functions operating during disruptions.
+- Disaster Recovery restores IT infrastructure and services.
+- BIA determines recovery priorities.
+- RTO defines acceptable downtime, while RPO defines acceptable data loss.
+- Backup strategies involve trade-offs between speed, storage, and recovery time.
+- Recovery sites balance cost against recovery speed.
+- Following the Incident Response lifecycle minimizes damage and improves future resilience.
