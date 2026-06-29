@@ -1,6 +1,15 @@
 # Cybersecurity Learning Journal
 
-A collection of my cybersecurity learning notes, architecture studies, and practical security projects.
+A personal knowledge base documenting my journey through cybersecurity certifications, hands-on labs, technical articles, and real-world security concepts.
+
+## 🎓 Latest Achievement
+
+> ✅ **Passed the ISC2 Certified in Cybersecurity (CC)** certification.
+
+This repository includes my complete study notes covering all five ISC2 CC domains, written with enterprise examples, diagrams, and practical explanations to reinforce concepts beyond the exam.
+
+📖 **Study Notes:**  
+- [ISC2 Certified in Cybersecurity (CC)](notes/ISC2-CC/)
 
 ## Articles
 
