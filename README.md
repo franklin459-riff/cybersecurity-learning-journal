@@ -1,42 +1,51 @@
-# Cybersecurity Learning Journal
+# 🛡️ Cybersecurity Learning Journal
 
-A personal knowledge base documenting my journey through cybersecurity certifications, hands-on labs, technical articles, and real-world security concepts.
+Welcome! I'm **Franklin**, a **Security Solutions Architect** with nearly **10 years of experience** in enterprise IT infrastructure, endpoint security, and cybersecurity.
 
-## 🎓 Latest Achievement
-
-> ✅ **Passed the ISC2 Certified in Cybersecurity (CC)** certification.
-
-This repository includes my complete study notes covering all five ISC2 CC domains, written with enterprise examples, diagrams, and practical explanations to reinforce concepts beyond the exam.
-
-📖 **Study Notes:**  
-- [ISC2 Certified in Cybersecurity (CC)](notes/ISC2-CC/)
-
-## Articles
-
-- [What is Endpoint Security](articles/what-is-endpoint-security.md)
-- [What is EDR (Endpoint Detection and Response)](articles/what-is-edr.md)
-- [What is XDR (Extended Detection and Response)](articles/what-is-xdr.md)
+This repository documents my learning through certification notes, technical articles, and hands-on labs. My goal is to build practical expertise in **cloud security, identity & access management, security architecture, and threat detection** while creating a public knowledge base for others to learn from.
 
 ---
 
-## Topics Covered
+## 🎯 Current Focus
 
+- ✅ ISC2 Certified in Cybersecurity (CC)
+- 📖 Microsoft SC-900
+- 🧪 Building hands-on cybersecurity labs
+- ☁️ Azure & Identity Security
+
+---
+
+## 📚 What's Inside
+
+### Certification Notes
+- ISC2 Certified in Cybersecurity (CC)
+- Microsoft SC-900 *(Coming Soon)*
+- Microsoft SC-300 *(Planned)*
+- Microsoft AZ-500 *(Planned)*
+
+### Technical Articles
 - Endpoint Security
-- EDR
-- XDR
+- Endpoint Detection & Response (EDR)
+- Extended Detection & Response (XDR)
 - Zero Trust
-- Identity & Access Management
-- Cloud Security
-- Security Architecture
-- Microsoft Security
-- CrowdStrike Falcon
-- Hands-on Labs
+
+### Upcoming Labs
+- Active Directory
+- Azure Security
+- Metasploitable
+- Windows & Linux Security
 
 ---
 
-## Learning Goals
+## 🛠️ Technologies
 
-- Build a strong cybersecurity knowledge base
-- Document hands-on security labs
-- Explore security architecture concepts
-- Share practical learning with the community
+**Security:** Identity & Access Management (IAM), Endpoint Security, Network Security, Zero Trust, Security Operations, Security Architecture
+
+**Platforms:** Azure, Active Directory, CrowdStrike Falcon, VMware, Windows Server, Linux, GitHub
+
+---
+
+## 🤝 Connect
+
+- **LinkedIn:** https://www.linkedin.com/in/franklinjosephwave/
+- **GitHub:** https://github.com/franklin459-riff
